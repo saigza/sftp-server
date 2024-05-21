@@ -23,6 +23,9 @@ resource "aws_lambda_function" "sftp" {
       "SecretsManagerRegion" = var.region
     }
   }
+  layers = [
+    "arn:aws:lambda:us-east-1:997991941211:layer:layerhvac:1"
+  ]
   tags = merge(
     var.input_tags,
     {
