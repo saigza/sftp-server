@@ -55,7 +55,7 @@ resource "aws_secretsmanager_secret_version" "secret" {
   secret_id     = aws_secretsmanager_secret.secret.id
   secret_string = <<EOF
 {
-  "Password": "ChangeMe",
+  "Password": "abc123***",
   "PublicKey": "${var.ssh_key}",
   "Role": "${aws_iam_role.sftp_transfer_server_user.arn}",
   "HomeDirectory": "/${var.s3_bucket_name}/${var.user_home}"

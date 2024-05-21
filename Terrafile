@@ -13,5 +13,5 @@
 # Use modules from the Terraform registry
 # mod "sqs", source: "terraform-aws-modules/sqs/aws"
 
-mod "sftp-server", source: "StratusGrid/transfer-server-custom-idp/aws", version: "1.0.2"
-mod "sftp-server-user", source: "StratusGrid/transfer-server-custom-idp-user/aws", version: "1.2.1"
+#mod "sftp-server", source: "StratusGrid/transfer-server-custom-idp/aws", version: "1.0.2"
+#mod "sftp-server-user", source: "StratusGrid/transfer-server-custom-idp-user/aws", version: "1.2.1"
