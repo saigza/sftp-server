@@ -23,9 +23,9 @@ resource "aws_lambda_function" "sftp" {
       "SecretsManagerRegion" = var.region
     }
   }
-  layers = [
-    "arn:aws:lambda:us-east-1:997991941211:layer:layerhvac:1"
-  ]
+ # layers = [
+ #   "arn:aws:lambda:us-east-1:997991941211:layer:layerhvac:1"
+ # ]
   tags = merge(
     var.input_tags,
     {
@@ -79,7 +79,8 @@ resource "aws_iam_role_policy" "sftp_lambda_role_policy" {
                 "kms:DescribeKey"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:kms:us-east-1:997991941211:key/ec90f6f2-c61f-44d2-954d-a45263c4ea9d"
+            "Resource": "arn:aws:kms:us-west-1:997991941211:key/b42784da-728b-4c78-b049-08a3c8d6c8e1"
+                         
         }
     ]
 }

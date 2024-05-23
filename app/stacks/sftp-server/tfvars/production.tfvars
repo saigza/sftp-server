@@ -1,6 +1,6 @@
 sftp_name = "SFTP-Server"
 
-region = "us-east-1"
+region = "us-west-1"
 
 sftp_tags = {
   Owner       = "terraspace",
