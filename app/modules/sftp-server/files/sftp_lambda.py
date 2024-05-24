@@ -58,9 +58,6 @@ def lambda_handler(event, context):
 
 def get_secret(id):
     
-    vault_addr = "https://vault.auronix.com"
-    vault_token = "hvs.1HglCm5gZDQjHTxxZ2sWd7IN"
-
     # vault_addr = os.getenv('VAULT_ADDR')
     # vault_token = os.getenv('VAULT_TOKEN')
     
