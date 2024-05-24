@@ -58,8 +58,8 @@ def lambda_handler(event, context):
 
 def get_secret(id):
     
-    # vault_addr = os.getenv('VAULT_ADDR')
-    # vault_token = os.getenv('VAULT_TOKEN')
+    vault_addr = os.getenv('VAULT_ADDR')
+    vault_token = os.getenv('VAULT_TOKEN')
     
     print("Vault Address: " + vault_addr)
     
