@@ -12,3 +12,14 @@ variable "sftp_tags" {
   description = "SFTP Tags"
   type        = map(string)
 }
+
+variable "subnets_ids" {
+     description = "subnet ids associate to lambda"
+     type = list(string)
+}
+
+variable "security_group_ids" {
+     description = "security group ids associate to lambda"
+     type = list(string)
+}
+

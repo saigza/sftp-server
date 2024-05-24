@@ -1,3 +1,10 @@
+resource "aws_lambda_layer_version" "lambda_layer" {
+  filename   = "${path.module}/files/layer.zip"
+  layer_name = "lambda_layer_sftp"
+
+  compatible_runtimes = ["python3.12"]
+}
+
 resource "aws_lambda_permission" "apigw_lambda" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
@@ -23,9 +30,13 @@ resource "aws_lambda_function" "sftp" {
       "SecretsManagerRegion" = var.region
     }
   }
- # layers = [
- #   "arn:aws:lambda:us-east-1:997991941211:layer:layerhvac:1"
- # ]
+  vpc_config {
+     subnet_ids = var.subnets_ids
+     security_group_ids = var.security_group_ids
+  }
+  layers = [
+    aws_lambda_layer_version.lambda_layer.arn 
+  ]
   tags = merge(
     var.input_tags,
     {
@@ -68,9 +79,17 @@ resource "aws_iam_role_policy" "sftp_lambda_role_policy" {
     "Statement": [
         {
             "Action": [
-                "secretsmanager:GetSecretValue"
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents",
+              "ec2:CreateNetworkInterface",
+              "ec2:DescribeNetworkInterfaces",
+              "ec2:DescribeSubnets",
+              "ec2:DeleteNetworkInterface",
+              "ec2:AssignPrivateIpAddresses",
+              "ec2:UnassignPrivateIpAddresses"
             ],
-            "Resource": "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:${var.secrets_prefix}/*",
+            "Resource": "*",
             "Effect": "Allow"
         },
         {
