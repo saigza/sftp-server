@@ -1,13 +1,1 @@
----
-sftp-server:
-  source: StratusGrid/transfer-server-custom-idp/aws
-  version: 1.0.2
-  type: registry
-  url: https://github.com/StratusGrid/terraform-aws-transfer-server-custom-idp
-  sha: ca32663859896ffacdb23b59e447d3a3bf6f6717
-sftp-server-user:
-  source: StratusGrid/transfer-server-custom-idp-user/aws
-  version: 1.2.1
-  type: registry
-  url: https://github.com/StratusGrid/terraform-aws-transfer-server-custom-idp-user
-  sha: 618da1e3dd42201c59262eede13aa2714ca34dc2
+--- {}
