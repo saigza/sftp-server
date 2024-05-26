@@ -112,10 +112,52 @@ resource "aws_transfer_server" "sftp_transfer_server" {
   invocation_role        = aws_iam_role.sftp_transfer_server_invocation.arn
   url                    = aws_api_gateway_stage.prod.invoke_url
 
+  endpoint_type = "VPC"
+  endpoint_details {
+    vpc_id                 = var.vpc_id_endpoint
+    subnet_ids             = var.subnets_ids_endpoint
+    security_group_ids     = [aws_security_group.sftp_sg.id] 
+    address_allocation_ids = var.address_allocation_ids_endpoint
+  }
+
   tags = merge(
     var.input_tags,
     {
       "Name" = "${var.name_prefix}-sftp-transfer-server${var.name_suffix}"
     },
   )
+
+  depends_on = [aws_security_group.sftp_sg]
+}
+
+# Security group for SFTP Server (if not existing)
+resource "aws_security_group" "sftp_sg" {
+  name        = "sftp_alterno_sg"
+  description = "Allow SFTP traffic in ports 22 and 2222"
+  vpc_id      = var.vpc_id_endpoint
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 2222
+    to_port     = 2222
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sftp_sg"
+  }
 }

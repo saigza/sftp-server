@@ -32,7 +32,7 @@ resource "aws_lambda_function" "sftp" {
   }
   vpc_config {
      subnet_ids = var.subnets_ids
-     security_group_ids = var.security_group_ids
+     security_group_ids = var.security_group_ids_lambda
   }
   layers = [
     aws_lambda_layer_version.lambda_layer.arn 

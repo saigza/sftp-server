@@ -27,12 +27,33 @@ variable "name_suffix" {
 }
 
 variable "subnets_ids" {
-     description = "subnet ids associate to lambda"
-     type = list(string)
+  description = "subnet ids associate to lambda"
+  type        = list(string)
 }
 
-variable "security_group_ids" {
-     description = "security group ids associate to lambda"
-     type = list(string)
+variable "security_group_ids_lambda" {
+  description = "security group ids associate to lambda"
+  type        = list(string)
 }
+
+variable "vpc_id_endpoint" {
+  description = "Id de la VPC donde se desplegará el endpoint type VPC"
+  type        = string
+}
+
+variable "subnets_ids_endpoint" {
+  description = "subnet id donde se desplegará el endpoint type VPC"
+  type        = list(string)
+}
+
+variable "address_allocation_ids_endpoint" {
+  description = "subnet id donde se desplegará el endpoint type VPC"
+  type        = list(string)
+}
+
+variable "network_interface_id_sftp" {
+  description = "ENI asociada al SFTP Server"
+  type        = string
+}
+
 
