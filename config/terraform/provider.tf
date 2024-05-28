@@ -33,6 +33,11 @@ provider "archive" {
   # Configuration options
 }
 
+provider "vault" {
+  address = var.vault_auth_url
+  token   = var.vault_auth_token
+}
+
 provider "random" {
   # Configuration options
 }

@@ -31,3 +31,15 @@ variable "sftp_user_user_home" {
   description = "HOME path for transfer server user. Mustn't start with /"
   type        = string
 }
+
+variable "vault_auth_url" {
+  description = "vault url"
+  type        = string
+  default     = "http://vault.auronix.com"
+}
+
+variable "vault_auth_token" {
+  description = "vault token"
+  type        = string
+  default     = ""
+}

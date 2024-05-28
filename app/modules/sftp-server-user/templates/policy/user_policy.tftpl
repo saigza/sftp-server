@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::${s3_bucket}",
+            "Sid": "AllowListingOfUserFolder"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "arn:aws:s3:::${s3_bucket}/${user_home}/*",
+            "Sid": "HomeDirObjectAccess"
+        }
+    ]
+}

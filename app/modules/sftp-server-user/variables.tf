@@ -1,3 +1,15 @@
+variable "vault_mount_path" {
+  description = "vault mount path"
+  type = string
+  default = "SFTP"
+}
+
+variable "vault_path" {
+  description = "vault path"
+  type = string
+  default = "users"
+}
+
 variable "s3_bucket_name" {
   description = "Transfer Server S3 bucket name"
   type        = string
