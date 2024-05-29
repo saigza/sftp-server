@@ -60,3 +60,15 @@ variable "s3_bucket_name" {
   description = "Transfer Server S3 bucket name"
   type        = string
 }
+
+variable "vault_addr" {
+  description = "vault url"
+  type        = string
+  default     = "http://vault.auronix.com"
+}
+
+variable "vault_token" {
+  description = "vault token"
+  type        = string
+  default     = ""
+}

@@ -10,4 +10,7 @@ module "sftp" {
   address_allocation_ids_endpoint = var.address_allocation_ids_endpoint
   network_interface_id_sftp       = var.network_interface_id_sftp
   s3_bucket_name                  = var.s3_bucket_name
+  vault_addr                      = var.vault_auth_url
+  vault_token                     = var.vault_auth_token
+
 }

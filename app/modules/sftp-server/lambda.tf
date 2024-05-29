@@ -27,7 +27,8 @@ resource "aws_lambda_function" "sftp" {
   timeouts {}
   environment {
     variables = {
-      "SecretsManagerRegion" = var.region
+      "VAULT_ADDR"  =	var.vault_addr
+      "VAULT_TOKEN"	= var.vault_token
     }
   }
   vpc_config {
@@ -35,7 +36,7 @@ resource "aws_lambda_function" "sftp" {
      security_group_ids = var.security_group_ids_lambda
   }
   layers = [
-    aws_lambda_layer_version.lambda_layer.arn 
+    aws_lambda_layer_version.lambda_layer.arn
   ]
   tags = merge(
     var.input_tags,
@@ -99,7 +100,7 @@ resource "aws_iam_role_policy" "sftp_lambda_role_policy" {
             ],
             "Effect": "Allow",
             "Resource": "arn:aws:kms:us-west-1:997991941211:key/b42784da-728b-4c78-b049-08a3c8d6c8e1"
-                         
+
         }
     ]
 }

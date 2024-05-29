@@ -12,7 +12,7 @@ sftp_users = {
         user_home = "MiguelAngel/Lisa"
     },
     "sgomez"={
-        read_only = true,
+        read_only = false,
         user_home = "MiguelAngel/Lisa"
     }
 }
