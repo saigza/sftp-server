@@ -100,7 +100,7 @@ resource "aws_iam_role_policy" "sftp_transfer_server_invocation" {
             ],
             "Resource": "*",
             "Effect": "Allow"
-        }       
+        }
     ]
 }
 POLICY
@@ -116,7 +116,7 @@ resource "aws_transfer_server" "sftp_transfer_server" {
   endpoint_details {
     vpc_id                 = var.vpc_id_endpoint
     subnet_ids             = var.subnets_ids_endpoint
-    security_group_ids     = [aws_security_group.sftp_sg.id] 
+    security_group_ids     = [aws_security_group.sftp_sg.id]
     address_allocation_ids = var.address_allocation_ids_endpoint
   }
 
@@ -160,4 +160,64 @@ resource "aws_security_group" "sftp_sg" {
   tags = {
     Name = "sftp_sg"
   }
+}
+
+resource "aws_iam_role" "sftp_transfer_server_role_read" {
+  name = "${var.name_prefix}-sftp-transfer-server-read-role"
+
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "transfer.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
+    ]
+  })
+  tags = {
+      "Name" = "${var.name_prefix}-sftp-transfer-server-read-role"
+  }
+}
+
+resource "aws_iam_role_policy" "sftp_transfer_server_policy_read" {
+  name = "${var.name_prefix}-sftp-transfer-server-policy-read"
+  role = aws_iam_role.sftp_transfer_server_role_read.id
+
+  policy = templatefile("${path.module}/templates/policy/read-only.tftpl",
+  {
+  s3_bucket = var.s3_bucket_name
+  })
+}
+
+resource "aws_iam_role" "sftp_transfer_server_role_write" {
+  name = "${var.name_prefix}-sftp-transfer-server-write-role"
+
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "transfer.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
+    ]
+  })
+  tags = {
+      "Name" = "${var.name_prefix}-sftp-transfer-server-write-role"
+    }
+}
+
+resource "aws_iam_role_policy" "sftp_transfer_server_policy_write" {
+  name = "${var.name_prefix}-sftp-transfer-server-policy-write"
+  role = aws_iam_role.sftp_transfer_server_role_write.id
+
+  policy = templatefile("${path.module}/templates/policy/read-write.tftpl",
+  {
+  s3_bucket = var.s3_bucket_name
+  })
 }

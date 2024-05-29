@@ -17,3 +17,11 @@ output "rest_api_http_method" {
 output "transfer_server_id" {
   value = aws_transfer_server.sftp_transfer_server.id
 }
+
+output "role_read_arn" {
+ value = aws_iam_role.sftp_transfer_server_role_read.arn
+}
+
+output "role_write_arn" {
+  value = aws_iam_role.sftp_transfer_server_role_write.arn
+}

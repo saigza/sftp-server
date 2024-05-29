@@ -1,10 +1,10 @@
 module "sftp-user" {
   source            = "../../modules/sftp-server-user"
-  name_prefix        = var.sftp_user_name_prefix
   s3_bucket_name    = var.sftp_user_s3_bucket_name
-  user_name         = var.sftp_user_user_name
-  read_only         = var.sftp_user_read_only
-  input_tags        = var.sftp_user_input_tags
-  secrets_prefix     = var.sftp_user_secrets_prefix
-  user_home         = var.sftp_user_user_home
+  for_each          = var.sftp_users
+  user_name         = each.key
+  read_only         = lookup(each.value, "read_only", null)
+  user_home         = lookup(each.value, "user_home", null)
+  role_read_arn     = var.sftp_user_role_read_arn
+  role_write_arn    = var.sftp_user_role_write_arn
 }

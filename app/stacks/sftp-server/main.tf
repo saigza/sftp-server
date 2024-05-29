@@ -9,4 +9,5 @@ module "sftp" {
   subnets_ids_endpoint            = var.subnets_ids_endpoint
   address_allocation_ids_endpoint = var.address_allocation_ids_endpoint
   network_interface_id_sftp       = var.network_interface_id_sftp
+  s3_bucket_name                  = var.s3_bucket_name
 }
