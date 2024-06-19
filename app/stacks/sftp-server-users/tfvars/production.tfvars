@@ -14,6 +14,10 @@ sftp_users = {
     "sgomez"={
         read_only = false,
         user_home = "MiguelAngel/Lisa"
+    },
+    "sodimacrep"={
+        read_only = false,
+        user_home = "Sodimac/Prueba"
     }
 }
 <% depends_on('sftp-server') %>
